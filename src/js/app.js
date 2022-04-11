@@ -16,7 +16,7 @@ import songView from "./songView.js";
 const containerEL = document.querySelector(".container");
 
 function makeHomeView() {
-    fetch("http://localhost:8080/albums")
+    fetch("http://the-music-vault.herokuapp.com/albums")
     .then(res => res.json())
     .then(albums => {
         makeHomeViewFromJson(albums)
@@ -66,7 +66,7 @@ function makeHomeViewFromJson(albums) {
         const deleteBtn = album.querySelector(".deleteBtn")
         deleteBtn.addEventListener("click", () => {
 
-            fetch("http://localhost:8080/albums/" + albumIdEl.value, {
+            fetch("http://the-music-vault.herokuapp.com/albums" + albumIdEl.value, {
                 method: 'DELETE'
             })
             .then(res => res.json())
@@ -81,7 +81,7 @@ function makeHomeViewFromJson(albums) {
             requiredInputAlbum.style.visibility = "hidden";
             const updateInput = album.querySelector(".update-album-title");
             if(updateInput.value != ""){
-                fetch("http://localhost:8080/albums/" + albumIdEl.value, {
+                fetch("http://the-music-vault.herokuapp.com/albums" + albumIdEl.value, {
                     method: "PATCH",
                     body: updateInput.value
                 })
@@ -109,7 +109,7 @@ function makeHomeViewFromJson(albums) {
                 "recordLabel": recordLabelInput.value,
             }
             requiredEl.style.visibility = "hidden";
-            fetch(`http://localhost:8080/albums/addAlbum`, {
+            fetch(`http://the-music-vault.herokuapp.com/albums/addAlbum`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -161,7 +161,7 @@ function makeAlbumView(album) {
                 "comments": []
             }
             requiredEl1.style.visibility = "hidden";
-            fetch(`http://localhost:8080/albums/${album.id}/addSong`, {
+            fetch(`http://the-music-vault.herokuapp.com/albums/${album.id}/addSong`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -192,7 +192,7 @@ function makeAlbumView(album) {
                 "rating": ratingInput.value,
                 "comment": commentInput.value
             }
-            fetch(`http://localhost:8080/albums/${album.id}/addComment`, {
+            fetch(`http://the-music-vault.herokuapp.com/albums/${album.id}/addComment`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -233,7 +233,7 @@ function bindSongViewFromJson(album) {
             const updateSongInput = song.querySelector(".update-song-title");
             if(updateSongInput.value!=""){
                 requiredInputEl1.style.visibility = "hidden";
-                fetch("http://localhost:8080/songs/" + songIdEl.value, {
+                fetch("http://the-music-vault.herokuapp.com/songs/" + songIdEl.value, {
                     method: "PATCH",
                     body: updateSongInput.value
                 })
@@ -249,7 +249,7 @@ function bindSongViewFromJson(album) {
 
         const deleteSongBtn = song.querySelector(".deleteBtn")
         deleteSongBtn.addEventListener("click", () => {
-            fetch("http://localhost:8080/songs/" + songIdEl.value, {
+            fetch("http://the-music-vault.herokuapp.com/songs/" + songIdEl.value, {
                 method: 'DELETE'
             })
             .then(res => res.json())
@@ -284,7 +284,7 @@ function makeSongView(songJson, albumJson) {
                 "rating": songRatingInput.value,
                 "comment": songCommentInput.value
             }
-            fetch(`http://localhost:8080/songs/${songJson.id}/addComment`, {
+            fetch(`http://the-music-vault.herokuapp.com/songs/${songJson.id}/addComment`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
